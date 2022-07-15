@@ -1,15 +1,21 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using DG.Tweening;
 
 public class PlayerController : MonoBehaviour
 {
     private Rigidbody rigidbody;
 
     [Header("Movement")]
-    public float speed = 5;
+    public float runSpeed = 5;
+    public float sideSpeed = 5;
     float _currSpeed;
     public float jumpForce = 5;
+
+    [Header("Jump Animation")]
+    public float scaleX = .9f;
+    public float scaleY = 1.1f;
 
     [Header("Turbo")]
     public float turboSpeed;
@@ -17,19 +23,20 @@ public class PlayerController : MonoBehaviour
     [SerializeField] int _currTurbo;
     public float turboTime;
     public bool _isJumping = false;
+    
 
     [Header("Bounds")]
     private float range = 5;
 
     private void OnValidate()
     {
-        if (rigidbody == null) rigidbody = GetComponentInChildren<Rigidbody>();
+        if (rigidbody == null) rigidbody = GetComponent<Rigidbody>();
     }
 
     // Start is called before the first frame update
     void Start()
     {
-        _currSpeed = speed;
+        _currSpeed = runSpeed;
         _currTurbo = 0;
     }
 
@@ -41,16 +48,22 @@ public class PlayerController : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.S)) TurboPlayer();
     }
 
+    [NaughtyAttributes.Button]
+    public void StopRun()
+    {
+        runSpeed = 0;
+    }
+
     public void Movement()
     {
         //Move Forward
-        transform.position += Vector3.forward * speed * Time.deltaTime;
+        transform.position += Vector3.forward * runSpeed * Time.deltaTime;
 
         //Move Sides
         float horizontalInputs = Input.GetAxis("Horizontal");
         float verticalInputs = Input.GetAxis("Vertical");
 
-        if(_isJumping == false) transform.Translate(Vector3.right * -speed * Time.deltaTime * horizontalInputs);
+        if(_isJumping == false) transform.Translate(Vector3.right * -sideSpeed * Time.deltaTime * horizontalInputs);
 
         //Bound
         if (transform.position.x > range)
@@ -70,6 +83,9 @@ public class PlayerController : MonoBehaviour
             rigidbody.velocity = Vector3.up * jumpForce;
             _isJumping = true;
             Invoke(nameof(NotJumping), 1);
+
+            transform.DOScaleX(scaleX, .2f).SetLoops(2, LoopType.Yoyo).SetEase(Ease.OutBack);
+            transform.DOScaleY(scaleY, .2f).SetLoops(2, LoopType.Yoyo).SetEase(Ease.OutBack);                           
         }
     }
 
@@ -90,10 +106,18 @@ public class PlayerController : MonoBehaviour
 
     public IEnumerator TurboCoroutine()
     {
-        speed = turboSpeed;
+        runSpeed = turboSpeed;
         yield return new WaitForSeconds(turboTime);
-        speed = _currSpeed;
+        runSpeed = _currSpeed;
         _currTurbo++;
         StopCoroutine(TurboCoroutine());
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.transform.CompareTag("Smash"))
+        {
+            Destroy(gameObject);
+        }
     }
 }
