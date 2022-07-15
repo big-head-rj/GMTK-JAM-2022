@@ -8,7 +8,14 @@ public class PlayerController : MonoBehaviour
 
     [Header("Movement")]
     public float speed = 5;
+    float _currSpeed;
     public float jumpForce = 5;
+
+    [Header("Turbo")]
+    public float turboSpeed;
+    public int maxTurbos = 3;
+    [SerializeField] int _currTurbo;
+    public float turboTime;
 
     [Header("Bounds")]
     private float range = 5;
@@ -21,7 +28,8 @@ public class PlayerController : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-
+        _currSpeed = speed;
+        _currTurbo = 0;
     }
 
     // Update is called once per frame
@@ -29,6 +37,7 @@ public class PlayerController : MonoBehaviour
     {
         Movement();
         Jump();
+        if (Input.GetKeyDown(KeyCode.S)) TurboPlayer();
     }
 
     public void Movement()
@@ -59,5 +68,24 @@ public class PlayerController : MonoBehaviour
         {
             rigidbody.velocity = Vector3.up * jumpForce;
         }
+    }
+
+    public void TurboPlayer()
+    {
+        if (_currTurbo < maxTurbos)
+        {
+            StartCoroutine(TurboCoroutine());
+            Debug.Log("Turbo");
+        }
+        else Debug.Log("Without turbo");
+    }
+
+    public IEnumerator TurboCoroutine()
+    {
+        speed = turboSpeed;
+        yield return new WaitForSeconds(turboTime);
+        speed = _currSpeed;
+        _currTurbo++;
+        StopCoroutine(TurboCoroutine());
     }
 }

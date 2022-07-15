@@ -508,6 +508,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   speed: 5
   jumpForce: 5
+  turboSpeed: 20
+  maxTurbos: 3
+  _currTurbo: 3
+  turboTime: 0.5
 --- !u!1 &490014505
 GameObject:
   m_ObjectHideFlags: 0
