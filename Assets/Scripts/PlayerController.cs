@@ -16,6 +16,7 @@ public class PlayerController : MonoBehaviour
     public int maxTurbos = 3;
     [SerializeField] int _currTurbo;
     public float turboTime;
+    public bool _isJumping = false;
 
     [Header("Bounds")]
     private float range = 5;
@@ -49,7 +50,7 @@ public class PlayerController : MonoBehaviour
         float horizontalInputs = Input.GetAxis("Horizontal");
         float verticalInputs = Input.GetAxis("Vertical");
 
-        transform.Translate(Vector3.right * -speed * Time.deltaTime * horizontalInputs);
+        if(_isJumping == false) transform.Translate(Vector3.right * -speed * Time.deltaTime * horizontalInputs);
 
         //Bound
         if (transform.position.x > range)
@@ -64,10 +65,17 @@ public class PlayerController : MonoBehaviour
 
     public void Jump()
     {
-        if (Input.GetKeyDown(KeyCode.Space))
+        if (Input.GetKeyDown(KeyCode.Space) && _isJumping == false)
         {
             rigidbody.velocity = Vector3.up * jumpForce;
+            _isJumping = true;
+            Invoke(nameof(NotJumping), 1);
         }
+    }
+
+    public void NotJumping()
+    {
+        _isJumping = false;
     }
 
     public void TurboPlayer()
