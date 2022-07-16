@@ -6,6 +6,7 @@ TagManager:
   tags:
   - Smash
   - Powerup
+  - Spike
   layers:
   - Default
   - TransparentFX
