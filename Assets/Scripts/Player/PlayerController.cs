@@ -1,9 +1,10 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Singleton;
 using DG.Tweening;
 
-public class PlayerController : MonoBehaviour
+public class PlayerController : Singleton<PlayerController>
 {
     private Rigidbody rigidbody;
 
@@ -33,6 +34,11 @@ public class PlayerController : MonoBehaviour
         if (rigidbody == null) rigidbody = GetComponent<Rigidbody>();
     }
 
+    protected override void Awake()
+    {
+        base.Awake();
+    }
+
     // Start is called before the first frame update
     void Start()
     {
@@ -52,6 +58,12 @@ public class PlayerController : MonoBehaviour
     public void StopRun()
     {
         runSpeed = 0;
+    }
+    
+    [NaughtyAttributes.Button]
+    public void BackRun()
+    {
+        runSpeed = 5;
     }
 
     public void Movement()
