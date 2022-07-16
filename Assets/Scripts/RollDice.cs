@@ -19,5 +19,6 @@ public class RollDice : MonoBehaviour
         //rigidbody.AddForce(Vector3.forward * 15 * Time.deltaTime);
         rigidbody.transform.position += Vector3.forward * 5 * Time.deltaTime;
         transform.Rotate(speedRoll, 0.0f, 0.0f);
+        //Testando Github Guto
     }
 }
