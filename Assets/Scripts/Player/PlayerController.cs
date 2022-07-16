@@ -21,7 +21,7 @@ public class PlayerController : Singleton<PlayerController>
     [Header("Turbo")]
     public float turboSpeed;
     public int maxTurbos = 3;
-    [SerializeField] int _currTurbo;
+    public int _currTurbo;
     public float turboTime;
     public bool _isJumping = false;
     
