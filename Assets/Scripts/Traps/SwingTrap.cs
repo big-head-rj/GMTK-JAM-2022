@@ -8,7 +8,7 @@ public class SwingTrap : MonoBehaviour
     {
         if (collision.transform.CompareTag("Player"))
         {
-            Destroy(gameObject);
+            if(PlayerController.Instance._isAlive == true) PlayerController.Instance.Dead();
         }
     }
 }

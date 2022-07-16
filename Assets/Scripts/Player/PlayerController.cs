@@ -6,7 +6,8 @@ using DG.Tweening;
 
 public class PlayerController : Singleton<PlayerController>
 {
-    private Rigidbody rigidbody;
+    public Rigidbody rigidbody;
+    public Animator animator;
 
     [Header("Movement")]
     public float runSpeed = 5;
@@ -29,9 +30,12 @@ public class PlayerController : Singleton<PlayerController>
     [Header("Bounds")]
     private float range = 5;
 
+    public bool _isAlive = true;
+
     private void OnValidate()
     {
         if (rigidbody == null) rigidbody = GetComponent<Rigidbody>();
+        if (animator == null) animator = GetComponentInChildren<Animator>();
     }
 
     protected override void Awake()
@@ -49,9 +53,16 @@ public class PlayerController : Singleton<PlayerController>
     // Update is called once per frame
     void Update()
     {
+        //OnDead();
+        if (Input.GetKeyUp(KeyCode.S)) TurboPlayer();
+        if (rigidbody.velocity.z == 0) animator.SetTrigger("Idle");
+        if (rigidbody.velocity.z > 0) animator.SetTrigger("Run");
+    }
+
+    private void FixedUpdate()
+    {
         Movement();
         Jump();
-        if (Input.GetKeyUp(KeyCode.S)) TurboPlayer();
     }
 
     [NaughtyAttributes.Button]
@@ -92,7 +103,8 @@ public class PlayerController : Singleton<PlayerController>
     {
         if (Input.GetKeyDown(KeyCode.Space) && _isJumping == false)
         {
-            rigidbody.velocity = Vector3.up * jumpForce;
+            //rigidbody.velocity = Vector3.up * jumpForce;
+            animator.SetTrigger("Jump");
             _isJumping = true;
             Invoke(nameof(NotJumping), 1);
 
@@ -104,6 +116,7 @@ public class PlayerController : Singleton<PlayerController>
     public void NotJumping()
     {
         _isJumping = false;
+        animator.SetTrigger("Run");
     }
 
     public void TurboPlayer()
@@ -118,19 +131,30 @@ public class PlayerController : Singleton<PlayerController>
         else Debug.Log("Without turbo");
     }
 
+    public void Dead()
+    {
+        _isAlive = false;
+        OnDead();
+    }
+
+    public void OnDead()
+    {
+        runSpeed = 0;
+        EnableRagDoll();
+        animator.SetTrigger("Die");
+    }
+
+    public void EnableRagDoll()
+    {
+        rigidbody.isKinematic = true;
+        rigidbody.detectCollisions = false;
+    }
+
     public IEnumerator TurboCoroutine()
     {
         runSpeed = turboSpeed;
         yield return new WaitForSeconds(turboTime);
         runSpeed = _currSpeed;
         StopCoroutine(TurboCoroutine());
-    }
-
-    private void OnTriggerEnter(Collider other)
-    {
-        if (other.transform.CompareTag("Smash"))
-        {
-            Destroy(gameObject);
-        }
     }
 }
