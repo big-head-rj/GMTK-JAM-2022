@@ -24,7 +24,7 @@ public class PlayerController : Singleton<PlayerController>
     public int _currTurbo;
     public float turboTime;
     public bool _isJumping = false;
-    
+
 
     [Header("Bounds")]
     private float range = 5;
@@ -51,7 +51,7 @@ public class PlayerController : Singleton<PlayerController>
     {
         Movement();
         Jump();
-        if (Input.GetKeyDown(KeyCode.S)) TurboPlayer();
+        if (Input.GetKeyUp(KeyCode.S)) TurboPlayer();
     }
 
     [NaughtyAttributes.Button]
@@ -59,7 +59,7 @@ public class PlayerController : Singleton<PlayerController>
     {
         runSpeed = 0;
     }
-    
+
     [NaughtyAttributes.Button]
     public void BackRun()
     {
@@ -75,7 +75,7 @@ public class PlayerController : Singleton<PlayerController>
         float horizontalInputs = Input.GetAxis("Horizontal");
         float verticalInputs = Input.GetAxis("Vertical");
 
-        if(_isJumping == false) transform.Translate(Vector3.right * -sideSpeed * Time.deltaTime * horizontalInputs);
+        if (_isJumping == false) transform.Translate(Vector3.right * -sideSpeed * Time.deltaTime * horizontalInputs);
 
         //Bound
         if (transform.position.x > range)
@@ -97,7 +97,7 @@ public class PlayerController : Singleton<PlayerController>
             Invoke(nameof(NotJumping), 1);
 
             transform.DOScaleX(scaleX, .2f).SetLoops(2, LoopType.Yoyo).SetEase(Ease.OutBack);
-            transform.DOScaleY(scaleY, .2f).SetLoops(2, LoopType.Yoyo).SetEase(Ease.OutBack);                           
+            transform.DOScaleY(scaleY, .2f).SetLoops(2, LoopType.Yoyo).SetEase(Ease.OutBack);
         }
     }
 
@@ -111,6 +111,8 @@ public class PlayerController : Singleton<PlayerController>
         if (_currTurbo < maxTurbos)
         {
             StartCoroutine(TurboCoroutine());
+            _currTurbo++;
+            ItemManager.Instance.RemoveTurbo();
             Debug.Log("Turbo");
         }
         else Debug.Log("Without turbo");
@@ -121,7 +123,6 @@ public class PlayerController : Singleton<PlayerController>
         runSpeed = turboSpeed;
         yield return new WaitForSeconds(turboTime);
         runSpeed = _currSpeed;
-        _currTurbo++;
         StopCoroutine(TurboCoroutine());
     }
 

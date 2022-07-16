@@ -6,7 +6,8 @@ using TMPro;
 
 public class ItemManager : Singleton<ItemManager>
 {
-    public TextMeshProUGUI uiTextCoins = null;
+    public TextMeshProUGUI uiTextDice = null;
+    public TextMeshProUGUI uiTextTurbo = null;
     //public TextMeshProUGUI uiTextLife;
 
     public int coins;
@@ -21,6 +22,7 @@ public class ItemManager : Singleton<ItemManager>
     private void Start()
     {
         coins = 0;
+        turbo = 3;
         //life = 0;
     }
 
@@ -44,9 +46,15 @@ public class ItemManager : Singleton<ItemManager>
         turbo += amount;
     }
 
+    public void RemoveTurbo(int amount = 1)
+    {
+        turbo -= amount;
+    }
+
     public void UpdateUI()
     {
-        uiTextCoins.text = "x " + coins;
+        uiTextDice.text = "DICES x " + coins;
+        uiTextTurbo.text = "TURBO x " + turbo;
         //uiTextLife.text = "x " + life;
     }
 }
