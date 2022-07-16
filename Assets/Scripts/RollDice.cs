@@ -5,7 +5,7 @@ using UnityEngine;
 public class RollDice : MonoBehaviour
 {
     public Rigidbody rigidbody;
-    public float speedRoll;
+    public float speedRoll = 3;
 
     // Start is called before the first frame update
     void Start()
@@ -18,6 +18,6 @@ public class RollDice : MonoBehaviour
     {
         //rigidbody.AddForce(Vector3.forward * 15 * Time.deltaTime);
         rigidbody.transform.position += Vector3.forward * 5 * Time.deltaTime;
-        transform.Rotate(0.0f, -speedRoll, 0.0f);
+        transform.Rotate(speedRoll, 0.0f, 0.0f);
     }
 }
