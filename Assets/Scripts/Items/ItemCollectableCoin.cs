@@ -20,6 +20,7 @@ public class ItemCollectableCoin : ItemCollectableBase
         base.OnCollect();
         collider.enabled = false;
         collect = true;
+        ItemManager.Instance.AddCoins();
     }
 
     private void Update()
