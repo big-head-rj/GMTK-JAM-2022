@@ -14,6 +14,7 @@ public class PlayerController : Singleton<PlayerController>
     public float sideSpeed = 5;
     float _currSpeed;
     public float jumpForce = 5;
+    public bool canRun = false;
 
     [Header("Jump Animation")]
     public float scaleX = .9f;
@@ -61,8 +62,11 @@ public class PlayerController : Singleton<PlayerController>
 
     private void FixedUpdate()
     {
-        Movement();
-        Jump();
+        if (canRun)
+        {
+            Movement();
+            Jump();
+        }
     }
 
     [NaughtyAttributes.Button]
