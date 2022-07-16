@@ -6,7 +6,7 @@ using DG.Tweening;
 public class SmashTrapManager : MonoBehaviour
 {
     public Transform trap;
-    public int dir;
+    public float dir;
     public float moveDuration;
     public Ease ease;
 
