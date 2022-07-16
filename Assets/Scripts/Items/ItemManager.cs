@@ -11,7 +11,7 @@ public class ItemManager : Singleton<ItemManager>
 
     public int coins;
     //public int life;
-    //public int turbo;
+    public int turbo;
 
     protected override void Awake()
     {
@@ -37,6 +37,11 @@ public class ItemManager : Singleton<ItemManager>
     public void AddLife(int amount = 1)
     {
         //life += amount;
+    }
+
+    public void AddTurbo(int amount = 1)
+    {
+        turbo += amount;
     }
 
     public void UpdateUI()
