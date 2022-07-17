@@ -8,6 +8,8 @@ public class PlayerController : Singleton<PlayerController>
 {
     public Rigidbody rigidbody;
     public Animator animator;
+    public AudioSource audioSource;
+    public List<AudioClip> sfxPlayer;
 
     [Header("Movement")]
     public float runSpeed = 5;
@@ -37,6 +39,7 @@ public class PlayerController : Singleton<PlayerController>
     {
         if (rigidbody == null) rigidbody = GetComponent<Rigidbody>();
         if (animator == null) animator = GetComponentInChildren<Animator>();
+        if (audioSource == null) audioSource = GetComponentInChildren<AudioSource>();
     }
 
     protected override void Awake()
@@ -85,6 +88,7 @@ public class PlayerController : Singleton<PlayerController>
     {
         //Move Forward
         transform.position += Vector3.forward * runSpeed * Time.deltaTime;
+        audioSource.Play();
 
         //Move Sides
         float horizontalInputs = Input.GetAxis("Horizontal");
