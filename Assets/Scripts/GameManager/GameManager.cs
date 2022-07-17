@@ -5,6 +5,8 @@ using DG.Tweening;
 
 public class GameManager : MonoBehaviour
 {
+    public GameObject mainMenu;
+
     [Header("Buttons Animation")]
     public GameObject btnContainer;
     public Ease ease;
@@ -15,6 +17,7 @@ public class GameManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        mainMenu.SetActive(true);
         AnimationButtons();
     }
 
@@ -35,5 +38,11 @@ public class GameManager : MonoBehaviour
     {
         PlayerController.Instance.canRun = true;
         RollDice.Instance.canRoll = true;
+        RollDice.Instance.CallDiceSFX();
+    }
+
+    public void ExitApplication()
+    {
+        Application.Quit();
     }
 }

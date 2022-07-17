@@ -6,8 +6,11 @@ using Singleton;
 public class RollDice : Singleton<RollDice>
 {
     public Rigidbody rigidbody;
+    public AudioSource audioSource;
+
     public float speedRoll = 3;
     public bool canRoll = false;
+    public float startSFXDelay = 3;
 
     protected override void Awake()
     {
@@ -30,5 +33,15 @@ public class RollDice : Singleton<RollDice>
             transform.Rotate(speedRoll, 0.0f, 0.0f);
             //Testando Github Guto
         }
+    }
+
+    public void CallDiceSFX()
+    {
+        Invoke(nameof(PlaySFX), startSFXDelay);
+    }
+
+    public void PlaySFX()
+    {
+        audioSource.Play();
     }
 }

@@ -60,7 +60,6 @@ public class PlayerController : Singleton<PlayerController>
         //OnDead();
         if (Input.GetKeyUp(KeyCode.S)) TurboPlayer();
         if (rigidbody.velocity.z == 0) animator.SetTrigger("Idle");
-        if (rigidbody.velocity.z > 0) animator.SetTrigger("Run");
     }
 
     private void FixedUpdate()
@@ -68,6 +67,7 @@ public class PlayerController : Singleton<PlayerController>
         if (canRun)
         {
             Movement();
+            if (rigidbody.velocity.z > 0) animator.SetTrigger("Run");
             Jump();
         }
     }
@@ -88,7 +88,7 @@ public class PlayerController : Singleton<PlayerController>
     {
         //Move Forward
         transform.position += Vector3.forward * runSpeed * Time.deltaTime;
-        audioSource.Play();
+        //SFXPool.Instance.Play(SFXType.FOOTSTEPS);
 
         //Move Sides
         float horizontalInputs = Input.GetAxis("Horizontal");
