@@ -14,6 +14,7 @@ GameObject:
   - component: {fileID: 1227773927}
   - component: {fileID: 1227773928}
   - component: {fileID: 1227773926}
+  - component: {fileID: 1217565629}
   m_Layer: 0
   m_Name: StatueD
   m_TagString: Untagged
@@ -111,7 +112,7 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 5.4816365, y: 4.5115557, z: 3.654039}
+  m_Size: {x: 2.15, y: 4.5115557, z: 3.654039}
   m_Center: {x: -0.052740213, y: 2.282961, z: 0.1796032}
 --- !u!114 &1227773926
 MonoBehaviour:
@@ -126,3 +127,21 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   rigidbody: {fileID: 1227773927}
+--- !u!114 &1217565629
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1206531086496142}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 705274ba75c81764d891a045f0b53869, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  trap: {fileID: 4663620794505304}
+  particleSystem: {fileID: 0}
+  collider: {fileID: 1227773928}
+  meshRenderer: {fileID: 23330476803711140}
+  meshRenderers: []
+  timeToDestroy: 3

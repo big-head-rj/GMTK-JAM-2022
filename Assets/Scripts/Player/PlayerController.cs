@@ -21,6 +21,7 @@ public class PlayerController : Singleton<PlayerController>
     [Header("Jump Animation")]
     public float scaleX = .9f;
     public float scaleY = 1.1f;
+    public float delayBetweensJumps = 1.5f;
 
     [Header("Turbo")]
     public float turboSpeed;
@@ -114,7 +115,7 @@ public class PlayerController : Singleton<PlayerController>
             rigidbody.velocity = Vector3.up * jumpForce;
             //animator.SetTrigger("Jump");
             _isJumping = true;
-            Invoke(nameof(NotJumping), 2);
+            Invoke(nameof(NotJumping), delayBetweensJumps);
 
             transform.DOScaleX(scaleX, .2f).SetLoops(2, LoopType.Yoyo).SetEase(Ease.OutBack);
             transform.DOScaleY(scaleY, .2f).SetLoops(2, LoopType.Yoyo).SetEase(Ease.OutBack);

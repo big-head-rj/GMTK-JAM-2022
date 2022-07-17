@@ -91,6 +91,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4058104849361498}
   - component: {fileID: 95816451845486120}
+  - component: {fileID: 5916279219009375740}
   m_Layer: 0
   m_Name: SwingTrapD
   m_TagString: Untagged
@@ -134,6 +135,27 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!114 &5916279219009375740
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1661269787379778}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 705274ba75c81764d891a045f0b53869, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  trap: {fileID: 4058104849361498}
+  particleSystem: {fileID: 0}
+  collider: {fileID: 1569569511}
+  meshRenderer: {fileID: 0}
+  meshRenderers:
+  - {fileID: 23582719214886582}
+  - {fileID: 23847038328012298}
+  - {fileID: 23622329610247358}
+  timeToDestroy: 3
 --- !u!1 &1701353839645368
 GameObject:
   m_ObjectHideFlags: 0
