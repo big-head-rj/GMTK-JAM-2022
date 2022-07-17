@@ -10,6 +10,8 @@ public class GameManager : MonoBehaviour
     public Ease ease;
     public float timeBtnAnim;
 
+    //[Header("Music Manager")]
+
     // Start is called before the first frame update
     void Start()
     {
