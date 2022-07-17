@@ -3,8 +3,9 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using DG.Tweening;
+using Singleton;
 
-public class GameManager : MonoBehaviour
+public class GameManager : Singleton<GameManager>
 {
     public GameObject mainMenu;
 
@@ -13,7 +14,15 @@ public class GameManager : MonoBehaviour
     public Ease ease;
     public float timeBtnAnim;
 
+    [Header("End Game")]
+    public GameObject endGameScreen;
+
     //[Header("Music Manager")]
+
+    protected override void Awake()
+    {
+        base.Awake();
+    }
 
     // Start is called before the first frame update
     void Start()
@@ -40,6 +49,13 @@ public class GameManager : MonoBehaviour
         PlayerController.Instance.canRun = true;
         RollDice.Instance.canRoll = true;
         RollDice.Instance.CallDiceSFX();
+    }
+
+    public void EndGame()
+    {
+        PlayerController.Instance.canRun = false;
+        RollDice.Instance.DestroyDice();
+        endGameScreen.SetActive(true);
     }
 
     public void RestartGame(int i)

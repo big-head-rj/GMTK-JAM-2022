@@ -35,6 +35,11 @@ public class RollDice : Singleton<RollDice>
         }
     }
 
+    public void DestroyDice()
+    {
+        Destroy(gameObject);
+    }
+
     public void CallDiceSFX()
     {
         Invoke(nameof(PlaySFX), startSFXDelay);

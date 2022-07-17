@@ -151,6 +151,12 @@ public class PlayerController : Singleton<PlayerController>
         runSpeed = 0;
         EnableRagDoll();
         animator.SetTrigger("Die");
+        Invoke(nameof(ShowEndGameScreen), 2);
+    }
+
+    public void ShowEndGameScreen()
+    {
+        GameManager.Instance.EndGame();
     }
 
     public void EnableRagDoll()
