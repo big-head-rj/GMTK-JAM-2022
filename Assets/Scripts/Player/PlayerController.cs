@@ -107,8 +107,8 @@ public class PlayerController : Singleton<PlayerController>
     {
         if (Input.GetKeyDown(KeyCode.Space) && _isJumping == false)
         {
-            //rigidbody.velocity = Vector3.up * jumpForce;
-            animator.SetTrigger("Jump");
+            rigidbody.velocity = Vector3.up * jumpForce;
+            //animator.SetTrigger("Jump");
             _isJumping = true;
             Invoke(nameof(NotJumping), 1);
 
