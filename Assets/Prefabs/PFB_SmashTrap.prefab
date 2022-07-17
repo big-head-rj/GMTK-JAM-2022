@@ -196,11 +196,29 @@ MeshRenderer:
   m_CorrespondingSourceObject: {fileID: 23598525695306064, guid: c428cce7819544e43825d891347548d3, type: 3}
   m_PrefabInstance: {fileID: 4128332717809126302}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &5203974291227344509 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 8174864211667334627, guid: c428cce7819544e43825d891347548d3, type: 3}
+  m_PrefabInstance: {fileID: 4128332717809126302}
+  m_PrefabAsset: {fileID: 0}
 --- !u!198 &7034403022056397045 stripped
 ParticleSystem:
   m_CorrespondingSourceObject: {fileID: 6401287413707690859, guid: c428cce7819544e43825d891347548d3, type: 3}
   m_PrefabInstance: {fileID: 4128332717809126302}
   m_PrefabAsset: {fileID: 0}
+--- !u!65 &1405661241
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4129498039803539070}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 5.090505, y: 6.4558873, z: 5.0905056}
+  m_Center: {x: 0.0058258767, y: 3.2390969, z: -0.07914722}
 --- !u!114 &6510399428410865674
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -221,19 +239,18 @@ MonoBehaviour:
   moveDuration: 1
   timeToDestroy: 3
   ease: 27
---- !u!65 &1405661241
-BoxCollider:
+--- !u!114 &450769068109019440
+MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4129498039803539070}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_GameObject: {fileID: 5203974291227344509}
   m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 5.090505, y: 6.4558873, z: 5.0905056}
-  m_Center: {x: 0.0058258767, y: 3.2390969, z: -0.07914722}
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 357c7bd4b73443849952249f21c89f8b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &4699724477851998998
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -378,11 +395,41 @@ MeshRenderer:
   m_CorrespondingSourceObject: {fileID: 23598525695306064, guid: c428cce7819544e43825d891347548d3, type: 3}
   m_PrefabInstance: {fileID: 4699724477851998998}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &3479652155322773237 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 8174864211667334627, guid: c428cce7819544e43825d891347548d3, type: 3}
+  m_PrefabInstance: {fileID: 4699724477851998998}
+  m_PrefabAsset: {fileID: 0}
 --- !u!198 &1868209341994780797 stripped
 ParticleSystem:
   m_CorrespondingSourceObject: {fileID: 6401287413707690859, guid: c428cce7819544e43825d891347548d3, type: 3}
   m_PrefabInstance: {fileID: 4699724477851998998}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &5766087059031454585
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3479652155322773237}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 357c7bd4b73443849952249f21c89f8b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!65 &1031118261
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4700881349498126070}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 5.090505, y: 6.4558873, z: 5.0905056}
+  m_Center: {x: 0.0058258767, y: 3.2390969, z: -0.07914722}
 --- !u!114 &8497005312250070209
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -403,16 +450,3 @@ MonoBehaviour:
   moveDuration: 1
   timeToDestroy: 3
   ease: 27
---- !u!65 &1031118261
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4700881349498126070}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 5.090505, y: 6.4558873, z: 5.0905056}
-  m_Center: {x: 0.0058258767, y: 3.2390969, z: -0.07914722}

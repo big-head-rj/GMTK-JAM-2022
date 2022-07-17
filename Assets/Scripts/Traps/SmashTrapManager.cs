@@ -50,10 +50,10 @@ public class SmashTrapManager : MonoBehaviour
     {
         meshRenderer.enabled = false;
         collider.enabled = false;
-        Invoke(nameof(Destroy), timeToDestroy);
+        Invoke(nameof(DestroyTrap), timeToDestroy);
     }
 
-    public void Destroytrap()
+    public void DestroyTrap()
     {
         Destroy(gameObject);
     }
