@@ -6,8 +6,14 @@ using DG.Tweening;
 public class SmashTrapManager : MonoBehaviour
 {
     public Transform trap;
+    public ParticleSystem particleSystem;
+    public Collider collider;
+    public MeshRenderer meshRenderer;
+
+    [Space]
     public float dir;
     public float moveDuration;
+    public float timeToDestroy = 3;
     public Ease ease;
 
     private TimerHelper _timerHelper;
@@ -16,6 +22,9 @@ public class SmashTrapManager : MonoBehaviour
     {
         if (_timerHelper == null) _timerHelper = GetComponentInParent<TimerHelper>();
         if (trap == null) trap = GetComponent<Transform>();
+        if (particleSystem == null) particleSystem = GetComponentInChildren<ParticleSystem>();
+        if (collider == null) collider = GetComponent<Collider>();
+        if (meshRenderer == null) meshRenderer = GetComponent<MeshRenderer>();
     }
 
     void Start()
@@ -35,5 +44,27 @@ public class SmashTrapManager : MonoBehaviour
             TrapClose();
             yield return new WaitForSeconds(_timerHelper.randomTime);
         }
+    }
+
+    public void HideTrap()
+    {
+        meshRenderer.enabled = false;
+        collider.enabled = false;
+        Invoke(nameof(Destroy), timeToDestroy);
+    }
+
+    public void Destroytrap()
+    {
+        Destroy(gameObject);
+    }
+
+    private void OnCollisionEnter(Collision collision)
+    {
+        if (collision.transform.CompareTag("Dice"))
+        {
+            HideTrap();
+            particleSystem.Play();
+        }
+            
     }
 }
