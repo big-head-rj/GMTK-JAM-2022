@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using DG.Tweening;
 
 public class GameManager : MonoBehaviour
@@ -39,6 +40,11 @@ public class GameManager : MonoBehaviour
         PlayerController.Instance.canRun = true;
         RollDice.Instance.canRoll = true;
         RollDice.Instance.CallDiceSFX();
+    }
+
+    public void RestartGame(int i)
+    {
+        SceneManager.LoadScene(i);
     }
 
     public void ExitApplication()

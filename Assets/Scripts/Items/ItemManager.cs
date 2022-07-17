@@ -10,7 +10,7 @@ public class ItemManager : Singleton<ItemManager>
     public TextMeshProUGUI uiTextTurbo = null;
     //public TextMeshProUGUI uiTextLife;
 
-    public int coins;
+    public int dice;
     //public int life;
     public int turbo;
 
@@ -21,7 +21,7 @@ public class ItemManager : Singleton<ItemManager>
 
     private void Start()
     {
-        coins = 0;
+        dice = 0;
         turbo = 3;
         //life = 0;
     }
@@ -33,7 +33,7 @@ public class ItemManager : Singleton<ItemManager>
 
     public void AddCoins(int amount = 1)
     {
-        coins += amount;
+        dice += amount;
     }
 
     public void AddLife(int amount = 1)
@@ -53,7 +53,7 @@ public class ItemManager : Singleton<ItemManager>
 
     public void UpdateUI()
     {
-        uiTextDice.text = "DICES x " + coins;
+        uiTextDice.text = "DICES x " + dice;
         uiTextTurbo.text = "TURBO x " + turbo;
         //uiTextLife.text = "x " + life;
     }
