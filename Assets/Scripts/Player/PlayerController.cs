@@ -138,6 +138,7 @@ public class PlayerController : Singleton<PlayerController>
     public void Dead()
     {
         _isAlive = false;
+        canRun = false;
         OnDead();
     }
 
