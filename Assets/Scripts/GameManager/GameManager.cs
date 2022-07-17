@@ -4,10 +4,13 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using DG.Tweening;
 using Singleton;
+using TMPro;
 
 public class GameManager : Singleton<GameManager>
 {
     public GameObject mainMenu;
+    public TextMeshProUGUI scoreText;
+    public TextMeshProUGUI diceText;
 
     [Header("Buttons Animation")]
     public GameObject btnContainer;
@@ -16,7 +19,7 @@ public class GameManager : Singleton<GameManager>
 
     [Header("End Game")]
     public GameObject endGameScreen;
-
+    public int finalScore;
     //[Header("Music Manager")]
 
     protected override void Awake()

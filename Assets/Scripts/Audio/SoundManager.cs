@@ -8,16 +8,14 @@ public class SoundManager : Singleton<SoundManager>
     public List<SFXSetup> sfxSetups;
 
     [Header("Sound On/Off")]
-    public GameObject buttonSoundOff;
-    public GameObject buttonSoundOn;
+    
     public AudioSource musicSource;
 
     protected override void Awake()
     {
         base.Awake();
 
-        buttonSoundOff.SetActive(false);
-        buttonSoundOn.SetActive(true);
+        
     }
 
     public void PlayMusicbyType(MusicType musicType)
@@ -42,16 +40,12 @@ public class SoundManager : Singleton<SoundManager>
     {
         musicSource.enabled = false;
         musicSource.Pause();
-        buttonSoundOn.SetActive(false);
-        buttonSoundOff.SetActive(true);
     }
 
     public void TurnMusicOn()
     {
         musicSource.enabled = true;
         musicSource.Play();
-        buttonSoundOff.SetActive(false);
-        buttonSoundOn.SetActive(true);
     }
 }
 
