@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 5233498267782109801}
   - component: {fileID: 5233498267782109800}
   - component: {fileID: 5233498267782109802}
+  - component: {fileID: 645738274}
   m_Layer: 0
   m_Name: PFB_PowerupTurbo
   m_TagString: Powerup
@@ -28,7 +29,7 @@ Transform:
   m_GameObject: {fileID: 5233498267782109783}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 2.4207332, y: -2.5878434, z: -33.534622}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 0.2, y: 10, z: 0.05}
   m_Children:
   - {fileID: 4660577952766522193}
   m_Father: {fileID: 0}
@@ -48,7 +49,7 @@ Rigidbody:
   m_UseGravity: 0
   m_IsKinematic: 0
   m_Interpolate: 0
-  m_Constraints: 0
+  m_Constraints: 80
   m_CollisionDetection: 0
 --- !u!135 &5233498267782109800
 SphereCollider:
@@ -83,6 +84,19 @@ MonoBehaviour:
   collect: 0
   lerpSpeed: 5
   minDistance: 1
+--- !u!114 &645738274
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5233498267782109783}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2b97cc04bc814064fb4f6e3ed55ddc54, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  speed: 3
 --- !u!1001 &4092356552140895911
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -100,15 +114,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8675985045912274422, guid: 6394e566031b8c644a81abd2ea14e3f3, type: 3}
       propertyPath: m_LocalScale.x
-      value: 0.2
+      value: 0.3975
       objectReference: {fileID: 0}
     - target: {fileID: 8675985045912274422, guid: 6394e566031b8c644a81abd2ea14e3f3, type: 3}
       propertyPath: m_LocalScale.y
-      value: 0.236915
+      value: 0.3
       objectReference: {fileID: 0}
     - target: {fileID: 8675985045912274422, guid: 6394e566031b8c644a81abd2ea14e3f3, type: 3}
       propertyPath: m_LocalScale.z
-      value: 0.39166
+      value: 0.8
       objectReference: {fileID: 0}
     - target: {fileID: 8675985045912274422, guid: 6394e566031b8c644a81abd2ea14e3f3, type: 3}
       propertyPath: m_LocalPosition.x
@@ -116,7 +130,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8675985045912274422, guid: 6394e566031b8c644a81abd2ea14e3f3, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0
+      value: 0.000000059605
       objectReference: {fileID: 0}
     - target: {fileID: 8675985045912274422, guid: 6394e566031b8c644a81abd2ea14e3f3, type: 3}
       propertyPath: m_LocalPosition.z
@@ -150,7 +164,9 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 90
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 8675985045648534635, guid: 6394e566031b8c644a81abd2ea14e3f3, type: 3}
+    - {fileID: 8675985045648534632, guid: 6394e566031b8c644a81abd2ea14e3f3, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 6394e566031b8c644a81abd2ea14e3f3, type: 3}
 --- !u!1 &4660577952766522198 stripped
 GameObject:
