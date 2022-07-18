@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class DestroyTrap : MonoBehaviour
-{
+{   
     public Transform trap;
     public List<ParticleSystem> particleSystems;
     public List<Collider> colliders;
@@ -19,14 +19,20 @@ public class DestroyTrap : MonoBehaviour
     [NaughtyAttributes.Button]
     public void HideTrap()
     {
-        for (int i = 0; i < meshRenderers.Count; i++)
+        if (meshRenderers != null)
         {
-            meshRenderers[i].enabled = false;
-            colliders[i].enabled = false;
+            for (int i = 0; i < meshRenderers.Count; i++)
+            {
+                meshRenderers[i].enabled = false;
+                colliders[i].enabled = false;
+            }
+        }
 
+        if (particleSystems != null)
+        {
             for (int j = 0; j < particleSystems.Count; j++)
             {
-                particleSystems[i].Play();
+                particleSystems[j].Play();
             }
         }
 
