@@ -30,8 +30,8 @@ public class GameManager : Singleton<GameManager>
     // Start is called before the first frame update
     void Start()
     {
-        mainMenu.SetActive(true);
-        AnimationButtons();
+        //mainMenu.SetActive(true);
+        //AnimationButtons();
     }
 
     public void PlayCameraAnimation()
@@ -49,9 +49,9 @@ public class GameManager : Singleton<GameManager>
     [NaughtyAttributes.Button]
     public void StartRun()
     {
-        PlayerController.Instance.canRun = true;
+        //PlayerController.Instance.canRun = true;
         RollDice.Instance.canRoll = true;
-        RollDice.Instance.CallDiceSFX();
+        //RollDice.Instance.CallDiceSFX();
     }
 
     public void EndGame()

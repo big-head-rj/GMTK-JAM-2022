@@ -9,7 +9,7 @@ public class RollDice : Singleton<RollDice>
     public AudioSource audioSource;
 
     public float speedRoll = 3;
-    public bool canRoll = false;
+    public bool canRoll = true;
     public float startSFXDelay = 3;
 
     protected override void Awake()
@@ -17,11 +17,12 @@ public class RollDice : Singleton<RollDice>
         base.Awake();
     }
 
-    // Start is called before the first frame update
-    void Start()
+    #region === DEBUG ===
+    public void TurnCanRollTrue()
     {
-
+        canRoll = true;
     }
+    #endregion
 
     // Update is called once per frame
     void Update()
@@ -37,7 +38,7 @@ public class RollDice : Singleton<RollDice>
 
     public void DestroyDice()
     {
-        Destroy(gameObject);
+        Destroy(gameObject, 5);
     }
 
     public void CallDiceSFX()

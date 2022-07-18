@@ -6,8 +6,8 @@ TagManager:
   tags:
   - Smash
   - Powerup
-  - Spike
   - Dice
+  - Trap
   layers:
   - Default
   - TransparentFX

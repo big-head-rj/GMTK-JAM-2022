@@ -46,7 +46,7 @@ public class SmashTrapManager : MonoBehaviour
         }
     }
 
-    public void HideTrap()
+    /*public void HideTrap()
     {
         meshRenderer.enabled = false;
         collider.enabled = false;
@@ -63,8 +63,8 @@ public class SmashTrapManager : MonoBehaviour
         if (collision.transform.CompareTag("Dice"))
         {
             HideTrap();
-            particleSystem.Play();
+            //particleSystem.Play();
         }
             
-    }
+    }*/
 }
