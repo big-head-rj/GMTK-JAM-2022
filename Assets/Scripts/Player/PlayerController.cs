@@ -8,6 +8,7 @@ public class PlayerController : Singleton<PlayerController>
 {
     public Rigidbody rigidbody;
     public Animator animator;
+    public ParticleSystem particleSystem;
     public AudioSource audioSource;
     public List<AudioClip> sfxPlayer;
 
@@ -41,6 +42,7 @@ public class PlayerController : Singleton<PlayerController>
         if (rigidbody == null) rigidbody = GetComponent<Rigidbody>();
         if (animator == null) animator = GetComponentInChildren<Animator>();
         if (audioSource == null) audioSource = GetComponentInChildren<AudioSource>();
+        if (particleSystem == null) particleSystem = GetComponentInChildren<ParticleSystem>();
     }
 
     protected override void Awake()
@@ -69,6 +71,7 @@ public class PlayerController : Singleton<PlayerController>
         {
             Movement();
             if (rigidbody.velocity.z > 0) animator.SetTrigger("Run");
+            particleSystem.Play();
             Jump();
         }
     }
@@ -144,6 +147,7 @@ public class PlayerController : Singleton<PlayerController>
     {
         _isAlive = false;
         canRun = false;
+        particleSystem.Stop();
         OnDead();
     }
 
