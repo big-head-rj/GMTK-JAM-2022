@@ -5078,6 +5078,7 @@ GameObject:
   - component: {fileID: 3204896434663389923}
   - component: {fileID: 9166131766538387767}
   - component: {fileID: 3182044803212024992}
+  - component: {fileID: 6860063184195353841}
   m_Layer: 0
   m_Name: PFB_SwingTrap
   m_TagString: Untagged
@@ -5160,6 +5161,20 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 4.48, y: 0.36, z: 1.5}
   m_Center: {x: 0, y: 2.08, z: -0.39}
+--- !u!114 &6860063184195353841
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3254864717229327497}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4722f569fa0ef0d40bcfd01d7f8d76f8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  animator: {fileID: 3204896434663389923}
+  animSpeed: 0.5
 --- !u!1 &3255521889516323729
 GameObject:
   m_ObjectHideFlags: 0
