@@ -115,7 +115,7 @@ public class PlayerController : Singleton<PlayerController>
     {
         if (Input.GetKeyDown(KeyCode.Space) && _isJumping == false)
         {
-            rigidbody.velocity = Vector3.up * jumpForce;
+            rigidbody.velocity = Vector3.up * jumpForce * 50 * Time.deltaTime;
             //animator.SetTrigger("Jump");
             _isJumping = true;
             Invoke(nameof(NotJumping), delayBetweensJumps);
