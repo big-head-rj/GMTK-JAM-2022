@@ -23,6 +23,7 @@ public class GameManager : Singleton<GameManager>
     public GameObject endGameScreen;
     public int finalScore;
     public int turboScore;
+    public bool checkedEndLine = false;
 
     [Header("Final Stars")]
     int totalScore;
@@ -128,6 +129,7 @@ public class GameManager : Singleton<GameManager>
     {
         TurnTurboInPoints();
         totalScore = ItemManager.Instance.dice * turboScore;
+        if (checkedEndLine) totalScore += 300;
         StarsCalculate();
         scoreText.text = "Score: " + totalScore.ToString("000");
         diceText.text = "Dices: " + ItemManager.Instance.dice.ToString("000");

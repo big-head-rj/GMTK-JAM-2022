@@ -15,6 +15,9 @@ public class PlayerController : Singleton<PlayerController>
     [Header("Movement")]
     public float runSpeed = 5;
     public float sideSpeed = 5;
+    [Range(1, 4)]
+    public float walkSpeed = 3;
+
     float _currSpeed;
     public float jumpForce = 5;
     public bool canRun = false;
@@ -60,9 +63,10 @@ public class PlayerController : Singleton<PlayerController>
     // Update is called once per frame
     void Update()
     {
-        //OnDead();
-        if (Input.GetKeyUp(KeyCode.S)) TurboPlayer();
         if (rigidbody.velocity.z == 0) animator.SetTrigger("Idle");
+        if (Input.GetKeyUp(KeyCode.S)) TurboPlayer();
+        if (Input.GetKey(KeyCode.W)) Walk();
+        if (Input.GetKeyUp(KeyCode.W)) BackRun();
     }
 
     private void FixedUpdate()
@@ -86,6 +90,14 @@ public class PlayerController : Singleton<PlayerController>
     public void BackRun()
     {
         runSpeed = 5;
+        animator.speed = 1;
+    }
+
+    public void Walk()
+    {
+        runSpeed = walkSpeed;
+        //animator.speed = walkSpeed/5;
+        animator.speed = .5f;
     }
 
     public void Movement()

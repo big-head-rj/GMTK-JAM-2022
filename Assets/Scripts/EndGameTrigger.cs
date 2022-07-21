@@ -8,6 +8,7 @@ public class EndGameTrigger : MonoBehaviour
     {
         if (other.transform.CompareTag("Player"))
         {
+            GameManager.Instance.checkedEndLine = true;
             GameManager.Instance.EndGame();
         }
     }
