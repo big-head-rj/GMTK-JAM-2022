@@ -33,7 +33,7 @@ public class PlayerController : Singleton<PlayerController>
 
 
     [Header("Bounds")]
-    private float range = 5;
+    private float range = 5.6f;
 
     public bool _isAlive = true;
 

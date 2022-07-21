@@ -9,6 +9,7 @@ using TMPro;
 public class GameManager : Singleton<GameManager>
 {
     public GameObject mainMenu;
+    public GameObject uiValues;
     public GameObject cameraCanvas;
     public TextMeshProUGUI scoreText = null;
     public TextMeshProUGUI diceText = null;
@@ -41,6 +42,7 @@ public class GameManager : Singleton<GameManager>
     {
         Time.timeScale = 1;
         cameraCanvas.SetActive(false);
+        uiValues.SetActive(false);
         mainMenu.SetActive(true);
         AnimationButtons();
         _isGameStarted = false;
@@ -78,6 +80,7 @@ public class GameManager : Singleton<GameManager>
     {
         _isGameStarted = true;
         cameraCanvas.SetActive(true);
+        uiValues.SetActive(true);
         PlayerController.Instance.canRun = true;
         RollDice.Instance.canMove = true;
         RollDice.Instance.CallDiceSFX();
@@ -105,6 +108,7 @@ public class GameManager : Singleton<GameManager>
     {
         PlayerController.Instance.canRun = false;
         cameraCanvas.SetActive(false);
+        uiValues.SetActive(false);
         RollDice.Instance.DestroyDice();
         UpdateUI();
         endGameScreen.SetActive(true);
