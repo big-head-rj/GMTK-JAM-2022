@@ -53,8 +53,8 @@ public class ItemManager : Singleton<ItemManager>
 
     public void UpdateUI()
     {
-        uiTextDice.text = "DICES x " + dice;
-        uiTextTurbo.text = "TURBO x " + turbo;
+        uiTextDice.text = " x " + dice;
+        uiTextTurbo.text = " x " + turbo;
         //uiTextLife.text = "x " + life;
     }
 }
