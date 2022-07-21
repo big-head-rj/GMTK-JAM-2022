@@ -52,7 +52,7 @@ public class GameManager : Singleton<GameManager>
     public void StartRun()
     {
         PlayerController.Instance.canRun = true;
-        RollDice.Instance.canRoll = true;
+        RollDice.Instance.canMove = true;
         RollDice.Instance.CallDiceSFX();
     }
     #endregion
