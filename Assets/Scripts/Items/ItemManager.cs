@@ -9,7 +9,6 @@ public class ItemManager : Singleton<ItemManager>
     public TextMeshProUGUI uiTextDice = null;
     public TextMeshProUGUI uiTextTurbo = null;
     //public TextMeshProUGUI uiTextLife;
-
     public int dice;
     //public int life;
     public int turbo;
