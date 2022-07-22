@@ -151,11 +151,15 @@ public class GameManager : Singleton<GameManager>
         }
         else if(totalScore >= 500 && totalScore < 700)
         {
+            fullStars[0].SetActive(true);
             fullStars[1].SetActive(true);
         }
         else if (totalScore >= 700)
         {
-            fullStars[2].SetActive(true);
+            foreach (var star in fullStars)
+            {
+                star.SetActive(true);
+            }
         }
     }
 }

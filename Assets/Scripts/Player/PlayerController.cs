@@ -34,6 +34,8 @@ public class PlayerController : Singleton<PlayerController>
     public float turboTime;
     public bool _isJumping = false;
 
+    [Header("Magnetic Powerup")]
+    public Collider magneticCollider;
 
     [Header("Bounds")]
     private float range = 5.6f;
@@ -64,7 +66,11 @@ public class PlayerController : Singleton<PlayerController>
     void Update()
     {
         if (rigidbody.velocity.z == 0) animator.SetTrigger("Idle");
-        if (Input.GetKeyUp(KeyCode.S)) TurboPlayer();
+        if (Input.GetKeyUp(KeyCode.S))
+        {
+            TurboPlayer();
+
+        }
         if (Input.GetKey(KeyCode.W)) Walk();
         if (Input.GetKeyUp(KeyCode.W)) BackRun();
     }
@@ -128,6 +134,7 @@ public class PlayerController : Singleton<PlayerController>
         if (Input.GetKeyDown(KeyCode.Space) && _isJumping == false)
         {
             rigidbody.velocity = Vector3.up * jumpForce * 50 * Time.deltaTime;
+            SFXPool.Instance.Play(SFXType.JUMP_02);
             //animator.SetTrigger("Jump");
             _isJumping = true;
             Invoke(nameof(NotJumping), delayBetweensJumps);
@@ -150,7 +157,6 @@ public class PlayerController : Singleton<PlayerController>
             StartCoroutine(TurboCoroutine());
             _currTurbo++;
             ItemManager.Instance.RemoveTurbo();
-            Debug.Log("Turbo");
         }
         else Debug.Log("Without turbo");
     }
@@ -159,6 +165,7 @@ public class PlayerController : Singleton<PlayerController>
     {
         _isAlive = false;
         canRun = false;
+        SFXPool.Instance.Play(SFXType.DEATH_03);
         //particleSystem.Stop();
         OnDead();
     }
@@ -176,6 +183,10 @@ public class PlayerController : Singleton<PlayerController>
         GameManager.Instance.EndGame();
     }
 
+    #region === Powerup ===
+
+    #endregion
+
     public void EnableRagDoll()
     {
         rigidbody.isKinematic = true;
@@ -185,6 +196,7 @@ public class PlayerController : Singleton<PlayerController>
     public IEnumerator TurboCoroutine()
     {
         runSpeed = turboSpeed;
+        SFXPool.Instance.Play(SFXType.USE_TURBO_06);
         yield return new WaitForSeconds(turboTime);
         runSpeed = _currSpeed;
         StopCoroutine(TurboCoroutine());

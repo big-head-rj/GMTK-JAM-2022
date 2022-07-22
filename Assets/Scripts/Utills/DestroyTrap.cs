@@ -9,11 +9,21 @@ public class DestroyTrap : MonoBehaviour
     public List<Collider> colliders;
     public List<MeshRenderer> meshRenderers;
 
+    [Header("SFX")]
+    public AudioSource audioSource;
+    [Range (0,1)]
+    public float volumeSFX;
+
     public float timeToDestroy = 3;
 
     private void OnValidate()
     {
         if (trap == null) trap = GetComponent<Transform>();
+    }
+
+    private void Awake()
+    {
+        if (audioSource == null) return;
     }
 
     [NaughtyAttributes.Button]
@@ -34,6 +44,13 @@ public class DestroyTrap : MonoBehaviour
             {
                 particleSystems[j].Play();
             }
+        }
+
+
+        if(audioSource != null)
+        {
+            audioSource.volume = volumeSFX;
+            audioSource.Play();
         }
 
         Destroy(gameObject, 3);

@@ -9,6 +9,7 @@ public class RollDice : Singleton<RollDice>
     public Transform diceToRoll;
     public AudioSource audioSource;
 
+    [Range(4, 6)]
     public float speedRoll = 3;
     public float moveSpeed = 5;
     public float startSFXDelay = 3;

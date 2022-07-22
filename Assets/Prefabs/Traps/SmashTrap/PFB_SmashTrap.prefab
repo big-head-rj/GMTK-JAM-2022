@@ -85,6 +85,8 @@ MonoBehaviour:
   meshRenderers:
   - {fileID: 4713879270929805894}
   - {fileID: 4114352720111493838}
+  audioSource: {fileID: 0}
+  volumeSFX: 0
   timeToDestroy: 3
 --- !u!1001 &4128332717809126302
 PrefabInstance:
@@ -141,6 +143,14 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 5766087059031454585, guid: c428cce7819544e43825d891347548d3, type: 3}
+      propertyPath: sfxVolume
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5766087059031454585, guid: c428cce7819544e43825d891347548d3, type: 3}
+      propertyPath: audioSource
+      value: 
+      objectReference: {fileID: 1256832039133570916}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: c428cce7819544e43825d891347548d3, type: 3}
 --- !u!4 &4126606994919870232 stripped
@@ -156,6 +166,11 @@ MeshRenderer:
 --- !u!65 &4128332717594465835 stripped
 BoxCollider:
   m_CorrespondingSourceObject: {fileID: 1031118261, guid: c428cce7819544e43825d891347548d3, type: 3}
+  m_PrefabInstance: {fileID: 4128332717809126302}
+  m_PrefabAsset: {fileID: 0}
+--- !u!82 &1256832039133570916 stripped
+AudioSource:
+  m_CorrespondingSourceObject: {fileID: 2899160027552034042, guid: c428cce7819544e43825d891347548d3, type: 3}
   m_PrefabInstance: {fileID: 4128332717809126302}
   m_PrefabAsset: {fileID: 0}
 --- !u!198 &7034403022056397045 stripped
@@ -218,6 +233,14 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 5766087059031454585, guid: c428cce7819544e43825d891347548d3, type: 3}
+      propertyPath: sfxVolume
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5766087059031454585, guid: c428cce7819544e43825d891347548d3, type: 3}
+      propertyPath: audioSource
+      value: 
+      objectReference: {fileID: 7566931572085209068}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: c428cce7819544e43825d891347548d3, type: 3}
 --- !u!4 &4699129123516587920 stripped
@@ -233,6 +256,11 @@ MeshRenderer:
 --- !u!65 &4699724477404415651 stripped
 BoxCollider:
   m_CorrespondingSourceObject: {fileID: 1031118261, guid: c428cce7819544e43825d891347548d3, type: 3}
+  m_PrefabInstance: {fileID: 4699724477851998998}
+  m_PrefabAsset: {fileID: 0}
+--- !u!82 &7566931572085209068 stripped
+AudioSource:
+  m_CorrespondingSourceObject: {fileID: 2899160027552034042, guid: c428cce7819544e43825d891347548d3, type: 3}
   m_PrefabInstance: {fileID: 4699724477851998998}
   m_PrefabAsset: {fileID: 0}
 --- !u!198 &1868209341994780797 stripped

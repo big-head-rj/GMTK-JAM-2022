@@ -4817,6 +4817,7 @@ GameObject:
   - component: {fileID: 3207662733354019373}
   - component: {fileID: 3059476383818136755}
   - component: {fileID: 1636408417}
+  - component: {fileID: 1842043064602980397}
   m_Layer: 0
   m_Name: Dice
   m_TagString: Dice
@@ -4977,6 +4978,25 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!114 &1842043064602980397
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3059476383818136764}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 491660f2dcfa6194dbd0129427438475, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  rigidbody: {fileID: 3059476383818136753}
+  diceToRoll: {fileID: 3314588796354574534}
+  audioSource: {fileID: 1636408417}
+  speedRoll: 5.5
+  moveSpeed: 5.5
+  startSFXDelay: 3
+  canMove: 0
 --- !u!1001 &3059476383438298925
 PrefabInstance:
   m_ObjectHideFlags: 0
