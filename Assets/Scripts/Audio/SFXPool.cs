@@ -6,24 +6,28 @@ using Singleton;
 public class SFXPool : Singleton<SFXPool>
 {
     public int poolSize = 10;
-    
+    public float poolVolume = 1;
     private List<AudioSource> _audioSourcesList;
     private int _index = 0;
 
     protected override void Awake()
     {
         base.Awake();
-
-        CreatePool();
     }
 
-    private void CreatePool()
+    private void Update()
+    {
+        
+    }
+
+    public void CreatePool()
     {
         _audioSourcesList = new List<AudioSource>();
         
         for(int i = 0; i < poolSize; i++)
         {
             CreateAudioSourceItem();
+            _audioSourcesList[i].volume = poolVolume;
         }
     }
 

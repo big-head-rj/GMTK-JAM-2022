@@ -79,6 +79,7 @@ public class GameManager : Singleton<GameManager>
     [NaughtyAttributes.Button]
     public void StartRun()
     {
+        SFXPool.Instance.CreatePool();
         _isGameStarted = true;
         cameraCanvas.SetActive(true);
         uiValues.SetActive(true);
