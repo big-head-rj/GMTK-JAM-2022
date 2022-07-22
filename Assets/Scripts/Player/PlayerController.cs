@@ -4,6 +4,8 @@ using UnityEngine;
 using Singleton;
 using DG.Tweening;
 
+// TIRAR OS HARD CODES
+
 public class PlayerController : Singleton<PlayerController>
 {
     public Rigidbody rigidbody;
@@ -35,7 +37,10 @@ public class PlayerController : Singleton<PlayerController>
     public bool _isJumping = false;
 
     [Header("Magnetic Powerup")]
-    public Collider magneticCollider;
+    public Transform magneticCollider;
+    public float magneticSize;
+    public float magneticTime;
+    public bool _hasMagnetic = false;
 
     [Header("Bounds")]
     private float range = 5.6f;
@@ -66,11 +71,7 @@ public class PlayerController : Singleton<PlayerController>
     void Update()
     {
         if (rigidbody.velocity.z == 0) animator.SetTrigger("Idle");
-        if (Input.GetKeyUp(KeyCode.S))
-        {
-            TurboPlayer();
-
-        }
+        if (Input.GetKeyUp(KeyCode.S)) TurboPlayer();
         if (Input.GetKey(KeyCode.W)) Walk();
         if (Input.GetKeyUp(KeyCode.W)) BackRun();
     }
@@ -86,25 +87,8 @@ public class PlayerController : Singleton<PlayerController>
         }
     }
 
-    [NaughtyAttributes.Button]
-    public void StopRun()
-    {
-        runSpeed = 0;
-    }
 
-    [NaughtyAttributes.Button]
-    public void BackRun()
-    {
-        runSpeed = 5;
-        animator.speed = 1;
-    }
-
-    public void Walk()
-    {
-        runSpeed = walkSpeed;
-        //animator.speed = walkSpeed/5;
-        animator.speed = .5f;
-    }
+    #region === MOVEMENTS ===
 
     public void Movement()
     {
@@ -150,17 +134,28 @@ public class PlayerController : Singleton<PlayerController>
         animator.SetTrigger("Run");
     }
 
-    public void TurboPlayer()
+    [NaughtyAttributes.Button]
+    public void StopRun()
     {
-        if (_currTurbo < maxTurbos && _isJumping == false)
-        {
-            StartCoroutine(TurboCoroutine());
-            _currTurbo++;
-            ItemManager.Instance.RemoveTurbo();
-        }
-        else Debug.Log("Without turbo");
+        runSpeed = 0;
     }
 
+    [NaughtyAttributes.Button]
+    public void BackRun()
+    {
+        runSpeed = 5;
+        animator.speed = 1;
+    }
+
+    public void Walk()
+    {
+        runSpeed = walkSpeed;
+        //animator.speed = walkSpeed/5;
+        animator.speed = .5f;
+    }
+    #endregion
+
+    #region === HEALTH ===
     public void Dead()
     {
         _isAlive = false;
@@ -178,19 +173,28 @@ public class PlayerController : Singleton<PlayerController>
         Invoke(nameof(ShowEndGameScreen), 5);
     }
 
-    public void ShowEndGameScreen()
-    {
-        GameManager.Instance.EndGame();
-    }
-
-    #region === Powerup ===
-
-    #endregion
-
     public void EnableRagDoll()
     {
         rigidbody.isKinematic = true;
         rigidbody.detectCollisions = false;
+    }
+
+    public void ShowEndGameScreen()
+    {
+        GameManager.Instance.EndGame();
+    }
+    #endregion
+
+    #region === POWERUPS ===
+    public void TurboPlayer()
+    {
+        if (_currTurbo < maxTurbos && _isJumping == false)
+        {
+            StartCoroutine(TurboCoroutine());
+            _currTurbo++;
+            ItemManager.Instance.RemoveTurbo();
+        }
+        else Debug.Log("Without turbo");
     }
 
     public IEnumerator TurboCoroutine()
@@ -201,4 +205,22 @@ public class PlayerController : Singleton<PlayerController>
         runSpeed = _currSpeed;
         StopCoroutine(TurboCoroutine());
     }
+
+    public void MagneticOn(bool b = false)
+    {
+        //b = _hasMagnetic;
+        if (b == true) StartCoroutine(MagneticCoroutine());
+    }
+
+    public IEnumerator MagneticCoroutine()
+    {
+        magneticCollider.transform.DOScaleX(5, 1);
+        yield return new WaitForSeconds(magneticTime);
+        magneticCollider.transform.DOScaleX(1, 1);
+        MagneticOn(false);
+        StopCoroutine(MagneticCoroutine());
+        //_hasMagnetic = false;
+    }
+
+    #endregion
 }
