@@ -4,7 +4,7 @@ using UnityEngine;
 using Singleton;
 using DG.Tweening;
 
-// TIRAR OS HARD CODES
+// TIRAR OS HARDCODES
 
 public class PlayerController : Singleton<PlayerController>
 {
@@ -17,10 +17,12 @@ public class PlayerController : Singleton<PlayerController>
     [Header("Movement")]
     public float runSpeed = 5;
     public float sideSpeed = 5;
+    float _currRunSpeed;
+    float _currSideSpeed;
     [Range(1, 4)]
     public float walkSpeed = 3;
 
-    float _currSpeed;
+    //float _currSpeed;
     public float jumpForce = 5;
     public bool canRun = false;
 
@@ -28,13 +30,14 @@ public class PlayerController : Singleton<PlayerController>
     public float scaleX = .9f;
     public float scaleY = 1.1f;
     public float delayBetweensJumps = 1.5f;
+    public bool _isJumping = false;
 
     [Header("Turbo")]
     public float turboSpeed;
     public int maxTurbos = 3;
     public int _currTurbo;
     public float turboTime;
-    public bool _isJumping = false;
+    bool _turboOn = false;
 
     [Header("Magnetic Powerup")]
     public Transform magneticCollider;
@@ -63,7 +66,8 @@ public class PlayerController : Singleton<PlayerController>
     // Start is called before the first frame update
     void Start()
     {
-        _currSpeed = runSpeed;
+        _currRunSpeed = runSpeed;
+        _currSideSpeed = sideSpeed;
         _currTurbo = 0;
     }
 
@@ -71,7 +75,7 @@ public class PlayerController : Singleton<PlayerController>
     void Update()
     {
         if (rigidbody.velocity.z == 0) animator.SetTrigger("Idle");
-        if (Input.GetKeyUp(KeyCode.S)) TurboPlayer();
+        if (Input.GetKeyUp(KeyCode.S) && !_turboOn) TurboPlayer();
         if (Input.GetKey(KeyCode.W)) Walk();
         if (Input.GetKeyUp(KeyCode.W)) BackRun();
     }
@@ -82,7 +86,6 @@ public class PlayerController : Singleton<PlayerController>
         {
             Movement();
             if (rigidbody.velocity.z > 0) animator.SetTrigger("Run");
-            //particleSystem.Play();
             Jump();
         }
     }
@@ -93,14 +96,14 @@ public class PlayerController : Singleton<PlayerController>
     public void Movement()
     {
         //Move Forward
-        transform.position += Vector3.forward * runSpeed * Time.deltaTime;
+        transform.position += Vector3.forward.normalized * _currRunSpeed * Time.deltaTime;
         //SFXPool.Instance.Play(SFXType.FOOTSTEPS);
 
         //Move Sides
         float horizontalInputs = Input.GetAxis("Horizontal");
         float verticalInputs = Input.GetAxis("Vertical");
 
-        if (_isJumping == false) transform.Translate(Vector3.right * -sideSpeed * Time.deltaTime * horizontalInputs);
+        if (_isJumping == false) transform.Translate(Vector3.right.normalized * -_currSideSpeed * Time.deltaTime * horizontalInputs);
 
         //Bound
         if (transform.position.x > range)
@@ -115,7 +118,7 @@ public class PlayerController : Singleton<PlayerController>
 
     public void Jump()
     {
-        if (Input.GetKeyDown(KeyCode.Space) && _isJumping == false)
+        if (Input.GetKeyUp(KeyCode.Space) && _isJumping == false)
         {
             rigidbody.velocity = Vector3.up * jumpForce * 50 * Time.deltaTime;
             SFXPool.Instance.Play(SFXType.JUMP_02);
@@ -143,14 +146,15 @@ public class PlayerController : Singleton<PlayerController>
     [NaughtyAttributes.Button]
     public void BackRun()
     {
-        runSpeed = 5;
+        _currRunSpeed = runSpeed;
+        _currSideSpeed = sideSpeed;
         animator.speed = 1;
     }
 
     public void Walk()
     {
-        runSpeed = walkSpeed;
-        //animator.speed = walkSpeed/5;
+        _currRunSpeed = walkSpeed;
+        _currSideSpeed = walkSpeed;
         animator.speed = .5f;
     }
     #endregion
@@ -158,6 +162,7 @@ public class PlayerController : Singleton<PlayerController>
     #region === HEALTH ===
     public void Dead()
     {
+        EnableRagDoll();
         _isAlive = false;
         canRun = false;
         SFXPool.Instance.Play(SFXType.DEATH_03);
@@ -168,7 +173,7 @@ public class PlayerController : Singleton<PlayerController>
     public void OnDead()
     {
         runSpeed = 0;
-        EnableRagDoll();
+        
         animator.SetTrigger("Die");
         Invoke(nameof(ShowEndGameScreen), 5);
     }
@@ -188,7 +193,7 @@ public class PlayerController : Singleton<PlayerController>
     #region === POWERUPS ===
     public void TurboPlayer()
     {
-        if (_currTurbo < maxTurbos && _isJumping == false)
+        if (_currTurbo < maxTurbos && !_isJumping)
         {
             StartCoroutine(TurboCoroutine());
             _currTurbo++;
@@ -199,10 +204,12 @@ public class PlayerController : Singleton<PlayerController>
 
     public IEnumerator TurboCoroutine()
     {
-        runSpeed = turboSpeed;
+        _turboOn = true;
+        _currRunSpeed = turboSpeed;
         SFXPool.Instance.Play(SFXType.USE_TURBO_06);
         yield return new WaitForSeconds(turboTime);
-        runSpeed = _currSpeed;
+        _currRunSpeed = runSpeed;
+        _turboOn = false;
         StopCoroutine(TurboCoroutine());
     }
 

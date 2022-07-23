@@ -11,7 +11,7 @@ public class StatueDManager : MonoBehaviour
 
     private void OnValidate()
     {
-        if (rigidbody == null) rigidbody = GetComponent<Rigidbody>();
+        //if (rigidbody == null) rigidbody = GetComponent<Rigidbody>();
     }
 
     [NaughtyAttributes.Button]

@@ -10,6 +10,7 @@ TagManager:
   - Trap
   - Spike
   - StatueTrigger
+  - Wall
   layers:
   - Default
   - TransparentFX
