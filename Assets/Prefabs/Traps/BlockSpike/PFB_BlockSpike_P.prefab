@@ -9752,8 +9752,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5460070298024432544}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.6031, y: 1.0518, z: 0.0295}
-  m_LocalScale: {x: 7.8818784, y: 0.52359927, z: 0.74697715}
+  m_LocalPosition: {x: 0.8171, y: 1.0518, z: 0.0295}
+  m_LocalScale: {x: 7.453892, y: 0.52359927, z: 0.74697715}
   m_Children: []
   m_Father: {fileID: 7472926974296307371}
   m_RootOrder: 6
@@ -9818,8 +9818,8 @@ BoxCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 1, y: 0.08826042, z: 0.5305809}
-  m_Center: {x: 0, y: 0.4558698, z: 0.00044940243}
+  m_Size: {x: 1, y: 0.08826042, z: 0.29566598}
+  m_Center: {x: 0, y: 0.4558698, z: 0.117906876}
 --- !u!114 &5460070298024432574
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -9849,7 +9849,7 @@ GameObject:
   - component: {fileID: 2017910814660119718}
   m_Layer: 0
   m_Name: BlockSpike02 01
-  m_TagString: Untagged
+  m_TagString: Wall
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 4294967295
@@ -9928,7 +9928,7 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 5.7877035, y: 1.0865738, z: 1.14871}
+  m_Size: {x: 5.7877035, y: 1.0865738, z: 1.54}
   m_Center: {x: 2.3938496, y: 0.10995268, z: 0.0040069683}
 --- !u!54 &2017910814660119718
 Rigidbody:
@@ -9945,7 +9945,7 @@ Rigidbody:
   m_IsKinematic: 0
   m_Interpolate: 0
   m_Constraints: 126
-  m_CollisionDetection: 2
+  m_CollisionDetection: 1
 --- !u!1 &7471945506832276810
 GameObject:
   m_ObjectHideFlags: 0

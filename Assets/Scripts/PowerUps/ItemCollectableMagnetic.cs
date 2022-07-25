@@ -18,9 +18,7 @@ public class ItemCollectableMagnetic : ItemCollectableBase
     {
         base.OnCollect();
         collider.enabled = false;
-        //SFXPool.Instance.Play(SFXType.MAGNETIC_COLLECT_07);
         collect = true;
-        //ItemManager.Instance.AddMagnetic();
         PlayerController.Instance.MagneticOn(true);
     }
 

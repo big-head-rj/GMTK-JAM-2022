@@ -8,7 +8,8 @@ using DG.Tweening;
 
 public class PlayerController : Singleton<PlayerController>
 {
-    public Rigidbody rigidbody;
+    public CharacterController characterController;
+    //public Rigidbody rigidbody;
     public Animator animator;
     //public ParticleSystem particleSystem;
     public AudioSource audioSource;
@@ -21,14 +22,15 @@ public class PlayerController : Singleton<PlayerController>
     float _currSideSpeed;
     [Range(1, 4)]
     public float walkSpeed = 3;
-
-    //float _currSpeed;
-    public float jumpForce = 5;
     public bool canRun = false;
 
-    [Header("Jump Animation")]
+    [Header("Jump")]
+    float _vSpeed;
+    public float jumpForce = 5;
+    public float gravity = 9.8f;
     public float scaleX = .9f;
     public float scaleY = 1.1f;
+
     public float delayBetweensJumps = 1.5f;
     public bool _isJumping = false;
 
@@ -52,7 +54,8 @@ public class PlayerController : Singleton<PlayerController>
 
     private void OnValidate()
     {
-        if (rigidbody == null) rigidbody = GetComponent<Rigidbody>();
+        if (characterController == null) characterController = GetComponent<CharacterController>();
+        //if (rigidbody == null) rigidbody = GetComponent<Rigidbody>();
         if (animator == null) animator = GetComponentInChildren<Animator>();
         if (audioSource == null) audioSource = GetComponentInChildren<AudioSource>();
         //if (particleSystem == null) particleSystem = GetComponentInChildren<ParticleSystem>();
@@ -74,62 +77,115 @@ public class PlayerController : Singleton<PlayerController>
     // Update is called once per frame
     void Update()
     {
-        if (rigidbody.velocity.z == 0) animator.SetTrigger("Idle");
+        if (canRun)
+        {
+            Move();
+            Jump();
+            Inputs();
+        }
+
+        if (!canRun) animator.SetTrigger("Idle");
+        if (canRun && characterController.isGrounded) animator.SetTrigger("Run");
+    }
+
+    public void Inputs()
+    {
         if (Input.GetKeyUp(KeyCode.S) && !_turboOn) TurboPlayer();
         if (Input.GetKey(KeyCode.W)) Walk();
         if (Input.GetKeyUp(KeyCode.W)) BackRun();
     }
 
-    private void FixedUpdate()
+
+    #region === MOVEMENTS ===
+
+    public void Move()
     {
-        if (canRun)
+
+        var move = new Vector3((Input.GetAxis("Horizontal")) * -sideSpeed, 0, _currRunSpeed);
+        _vSpeed -= gravity * Time.deltaTime;
+        move.y = _vSpeed;
+
+        characterController.Move(move * Time.deltaTime);
+    }
+
+    public void Jump()
+    {
+        if (_isJumping) _isJumping = false;
+
+        if (characterController.isGrounded)
         {
-            Movement();
-            if (rigidbody.velocity.z > 0) animator.SetTrigger("Run");
-            Jump();
+            _vSpeed = 0;
+
+            if (Input.GetKeyDown(KeyCode.Space))
+            {
+                _vSpeed = jumpForce;
+
+                if (!_isJumping)
+                {
+                    _isJumping = true;
+                    animator.SetTrigger("Jump");
+                    SFXPool.Instance.Play(SFXType.JUMP_02);
+                }
+            }
         }
     }
 
 
-    #region === MOVEMENTS ===
-
-    public void Movement()
+    #region === OLD MOVES === 
+    /*public void Movement()
     {
         //Move Forward
-        transform.position += Vector3.forward.normalized * _currRunSpeed * Time.deltaTime;
-        //SFXPool.Instance.Play(SFXType.FOOTSTEPS);
+        //transform.position += Vector3.forward.normalized * _currRunSpeed * Time.deltaTime;
+        //characterController.SimpleMove(Vector3.forward * _currRunSpeed * Time.deltaTime);
+        characterController.Move(_currRunSpeed * Time.deltaTime * Vector3.forward);
+
 
         //Move Sides
         float horizontalInputs = Input.GetAxis("Horizontal");
         float verticalInputs = Input.GetAxis("Vertical");
 
-        if (_isJumping == false) transform.Translate(Vector3.right.normalized * -_currSideSpeed * Time.deltaTime * horizontalInputs);
+
+        //if (_isJumping == false) transform.Translate(Vector3.right.normalized * -_currSideSpeed * Time.deltaTime * horizontalInputs);
+        if (_isJumping == false) characterController.Move(-_currSideSpeed * horizontalInputs * Time.deltaTime * Vector3.right);
 
         //Bound
         if (transform.position.x > range)
         {
-            transform.position = new Vector3(range, transform.position.y, transform.position.z);
+            characterController.transform.position = new Vector3(range, transform.position.y, transform.position.z);
+
         }
         else if (transform.position.x < -range)
         {
-            transform.position = new Vector3(-range, transform.position.y, transform.position.z);
+            characterController.transform.position = new Vector3(-range, transform.position.y, transform.position.z);
         }
     }
 
     public void Jump()
     {
-        if (Input.GetKeyUp(KeyCode.Space) && _isJumping == false)
-        {
-            rigidbody.velocity = Vector3.up * jumpForce * 50 * Time.deltaTime;
-            SFXPool.Instance.Play(SFXType.JUMP_02);
-            //animator.SetTrigger("Jump");
-            _isJumping = true;
-            Invoke(nameof(NotJumping), delayBetweensJumps);
 
-            transform.DOScaleX(scaleX, .2f).SetLoops(2, LoopType.Yoyo).SetEase(Ease.OutBack);
-            transform.DOScaleY(scaleY, .2f).SetLoops(2, LoopType.Yoyo).SetEase(Ease.OutBack);
+        if (characterController.isGrounded)
+        {
+            _vSpeed = 0;
+
+            if (Input.GetKeyUp(KeyCode.Space))
+            {
+                //characterController.velocity.y = Vector3.up * jumpForce * 50 * Time.deltaTime;
+
+                _vSpeed = jumpForce;
+                SFXPool.Instance.Play(SFXType.JUMP_02);
+                //animator.SetTrigger("Jump");
+                //_isJumping = true;
+                //Invoke(nameof(NotJumping), delayBetweensJumps);
+
+                transform.DOScaleX(scaleX, .2f).SetLoops(2, LoopType.Yoyo).SetEase(Ease.OutBack);
+                transform.DOScaleY(scaleY, .2f).SetLoops(2, LoopType.Yoyo).SetEase(Ease.OutBack);
+            }
         }
-    }
+
+        _vSpeed -= gravity * Time.deltaTime;
+        characterController.Move(Vector3.up * _vSpeed * Time.deltaTime);
+    }*/
+    #endregion
 
     public void NotJumping()
     {
@@ -173,15 +229,15 @@ public class PlayerController : Singleton<PlayerController>
     public void OnDead()
     {
         runSpeed = 0;
-        
+        characterController.detectCollisions = false;
         animator.SetTrigger("Die");
         Invoke(nameof(ShowEndGameScreen), 5);
     }
 
     public void EnableRagDoll()
     {
-        rigidbody.isKinematic = true;
-        rigidbody.detectCollisions = false;
+        //rigidbody.isKinematic = true;
+        //rigidbody.detectCollisions = false;
     }
 
     public void ShowEndGameScreen()

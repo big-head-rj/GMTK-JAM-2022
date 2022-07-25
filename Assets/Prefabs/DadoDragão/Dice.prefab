@@ -26,7 +26,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2292790341376341877}
   m_LocalRotation: {x: 0, y: 0.98261285, z: 0.18566658, w: 0}
-  m_LocalPosition: {x: 0, y: -3.17, z: 3.32}
+  m_LocalPosition: {x: 0, y: -3.13, z: 2.87}
   m_LocalScale: {x: 1, y: 1, z: 1.4809997}
   m_Children: []
   m_Father: {fileID: 3059476383818136767}
@@ -115,7 +115,7 @@ ParticleSystem:
     startLifetime:
       serializedVersion: 2
       minMaxState: 0
-      scalar: 2
+      scalar: 5
       minScalar: 5
       maxCurve:
         serializedVersion: 2
@@ -606,7 +606,7 @@ ParticleSystem:
     gravityModifier:
       serializedVersion: 2
       minMaxState: 0
-      scalar: -0.15
+      scalar: 0
       minScalar: 0
       maxCurve:
         serializedVersion: 2
@@ -667,7 +667,7 @@ ParticleSystem:
     donutRadius: 0.2
     m_Position: {x: 0, y: 0, z: 0}
     m_Rotation: {x: 0, y: 0, z: 0}
-    m_Scale: {x: 11.17, y: 1, z: 1}
+    m_Scale: {x: 8.1, y: 1, z: 1}
     placementMode: 0
     m_MeshMaterialIndex: 0
     m_MeshNormalOffset: 0
@@ -918,7 +918,7 @@ ParticleSystem:
     rateOverDistance:
       serializedVersion: 2
       minMaxState: 0
-      scalar: 10
+      scalar: 20
       minScalar: 0
       maxCurve:
         serializedVersion: 2
@@ -1312,15 +1312,15 @@ ParticleSystem:
         key6: {r: 0, g: 0, b: 0, a: 0}
         key7: {r: 0, g: 0, b: 0, a: 0}
         ctime0: 0
-        ctime1: 21010
+        ctime1: 33346
         ctime2: 65535
         ctime3: 0
         ctime4: 0
         ctime5: 0
         ctime6: 0
         ctime7: 0
-        atime0: 0
-        atime1: 31997
+        atime0: 17926
+        atime1: 36623
         atime2: 0
         atime3: 0
         atime4: 0
@@ -4815,9 +4815,11 @@ GameObject:
   - component: {fileID: 3059476383818136767}
   - component: {fileID: 3059476383818136753}
   - component: {fileID: 3207662733354019373}
+  - component: {fileID: 537249636357538129}
+  - component: {fileID: 1842043064602980397}
   - component: {fileID: 3059476383818136755}
   - component: {fileID: 1636408417}
-  - component: {fileID: 1842043064602980397}
+  - component: {fileID: 8841834046971504623}
   m_Layer: 0
   m_Name: Dice
   m_TagString: Dice
@@ -4855,7 +4857,7 @@ Rigidbody:
   m_UseGravity: 1
   m_IsKinematic: 0
   m_Interpolate: 0
-  m_Constraints: 80
+  m_Constraints: 112
   m_CollisionDetection: 0
 --- !u!65 &3207662733354019373
 BoxCollider:
@@ -4868,8 +4870,41 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 10.287454, y: 7.6059256, z: 9.928008}
-  m_Center: {x: 0.082129955, y: 0.017235756, z: -0.14380455}
+  m_Size: {x: 10.405138, y: 8.557181, z: 7.9029527}
+  m_Center: {x: -0.250803, y: 0.27206755, z: -0.17031503}
+--- !u!136 &537249636357538129
+CapsuleCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3059476383818136764}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  m_Radius: 4.4
+  m_Height: 18.77
+  m_Direction: 0
+  m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &1842043064602980397
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3059476383818136764}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 491660f2dcfa6194dbd0129427438475, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  rigidbody: {fileID: 3059476383818136753}
+  diceToRoll: {fileID: 3314588796354574534}
+  audioSource: {fileID: 1636408417}
+  speedRoll: 5.002
+  moveSpeed: 5.5
+  startSFXDelay: 3
+  canMove: 0
 --- !u!114 &3059476383818136755
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4882,6 +4917,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 357c7bd4b73443849952249f21c89f8b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  audioSource: {fileID: 1636408417}
+  sfxVolume: 0
 --- !u!82 &1636408417
 AudioSource:
   m_ObjectHideFlags: 0
@@ -4978,25 +5015,102 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
---- !u!114 &1842043064602980397
-MonoBehaviour:
+--- !u!82 &8841834046971504623
+AudioSource:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3059476383818136764}
   m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 491660f2dcfa6194dbd0129427438475, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  rigidbody: {fileID: 3059476383818136753}
-  diceToRoll: {fileID: 3314588796354574534}
-  audioSource: {fileID: 1636408417}
-  speedRoll: 5.5
-  moveSpeed: 5.5
-  startSFXDelay: 3
-  canMove: 0
+  serializedVersion: 4
+  OutputAudioMixerGroup: {fileID: 0}
+  m_audioClip: {fileID: 8300000, guid: eb0fa577f1b075f46a8a585f2d0fd96e, type: 3}
+  m_PlayOnAwake: 0
+  m_Volume: 1
+  m_Pitch: 1
+  Loop: 0
+  Mute: 0
+  Spatialize: 0
+  SpatializePostEffects: 0
+  Priority: 128
+  DopplerLevel: 1
+  MinDistance: 1
+  MaxDistance: 500
+  Pan2D: 0
+  rolloffMode: 0
+  BypassEffects: 0
+  BypassListenerEffects: 0
+  BypassReverbZones: 0
+  rolloffCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 1
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  panLevelCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  spreadCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  reverbZoneMixCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
 --- !u!1001 &3059476383438298925
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -5010,15 +5124,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 2b90b797ab943794c82777b27fe505bd, type: 3}
       propertyPath: m_LocalScale.x
-      value: 0.1
+      value: 0.11
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 2b90b797ab943794c82777b27fe505bd, type: 3}
       propertyPath: m_LocalScale.y
-      value: 0.1
+      value: 0.11
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 2b90b797ab943794c82777b27fe505bd, type: 3}
       propertyPath: m_LocalScale.z
-      value: 0.1
+      value: 0.11
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 2b90b797ab943794c82777b27fe505bd, type: 3}
       propertyPath: m_LocalPosition.x
@@ -5034,23 +5148,23 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 2b90b797ab943794c82777b27fe505bd, type: 3}
       propertyPath: m_LocalRotation.w
-      value: 0.5082642
+      value: 0.7071068
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 2b90b797ab943794c82777b27fe505bd, type: 3}
       propertyPath: m_LocalRotation.x
-      value: -0.4915969
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 2b90b797ab943794c82777b27fe505bd, type: 3}
       propertyPath: m_LocalRotation.y
-      value: 0.4915969
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 2b90b797ab943794c82777b27fe505bd, type: 3}
       propertyPath: m_LocalRotation.z
-      value: 0.5082642
+      value: 0.7071068
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 2b90b797ab943794c82777b27fe505bd, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
-      value: -88.09
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 2b90b797ab943794c82777b27fe505bd, type: 3}
       propertyPath: m_LocalEulerAnglesHint.y
@@ -5066,45 +5180,8 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 2b90b797ab943794c82777b27fe505bd, type: 3}
---- !u!1 &2788880863361000060 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: 2b90b797ab943794c82777b27fe505bd, type: 3}
-  m_PrefabInstance: {fileID: 3059476383438298925}
-  m_PrefabAsset: {fileID: 0}
 --- !u!4 &3314588796354574534 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 2b90b797ab943794c82777b27fe505bd, type: 3}
   m_PrefabInstance: {fileID: 3059476383438298925}
   m_PrefabAsset: {fileID: 0}
---- !u!135 &1830059555
-SphereCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2788880863361000060}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 1
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Radius: 39.39
-  m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &9110837904769572509
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2788880863361000060}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 491660f2dcfa6194dbd0129427438475, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  rigidbody: {fileID: 3059476383818136753}
-  diceToRoll: {fileID: 0}
-  audioSource: {fileID: 1636408417}
-  speedRoll: 2
-  moveSpeed: 5
-  startSFXDelay: 3
-  canMove: 0

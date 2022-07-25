@@ -5,9 +5,11 @@ using UnityEngine;
 public class DestroyTrap : MonoBehaviour
 {   
     public Transform trap;
-    public List<ParticleSystem> particleSystems;
-    public List<Collider> colliders;
-    public List<MeshRenderer> meshRenderers;
+    public ParticleSystem[] particleSystems;
+    public Collider[] colliders;
+    //public List<MeshRenderer> meshRenderers;
+    public MeshRenderer[] meshRenderers;
+    public SkinnedMeshRenderer[] skinnedRenderers;
 
     [Header("SFX")]
     public AudioSource audioSource;
@@ -19,6 +21,10 @@ public class DestroyTrap : MonoBehaviour
     private void OnValidate()
     {
         if (trap == null) trap = GetComponent<Transform>();
+        if (meshRenderers == null) meshRenderers = GetComponentsInChildren<MeshRenderer>();
+        //particleSystems = GetComponentsInChildren<ParticleSystem>();
+        colliders = GetComponentsInChildren<Collider>();
+        skinnedRenderers = GetComponentsInChildren<SkinnedMeshRenderer>();
     }
 
     private void Awake()
@@ -31,21 +37,36 @@ public class DestroyTrap : MonoBehaviour
     {
         if (meshRenderers != null)
         {
-            for (int i = 0; i < meshRenderers.Count; i++)
+            foreach (var renderer in meshRenderers)
             {
-                meshRenderers[i].enabled = false;
-                colliders[i].enabled = false;
+                renderer.enabled = false;
             }
         }
 
-        if (particleSystems != null)
+        if(skinnedRenderers != null)
         {
-            for (int j = 0; j < particleSystems.Count; j++)
+            foreach (var skinned in skinnedRenderers)
             {
-                particleSystems[j].Play();
+                skinned.enabled = false;
             }
         }
 
+        if(colliders != null)
+        {
+            foreach (var collider in colliders)
+            {
+                collider.enabled = false;
+            }
+        }
+
+        if(particleSystems != null)
+        {
+            foreach (var ps in particleSystems)
+            {
+                Debug.Log("PS Play");
+                ps.Play();
+            }
+        }
 
         if(audioSource != null)
         {
@@ -60,7 +81,6 @@ public class DestroyTrap : MonoBehaviour
     {
         if (other.transform.CompareTag("Dice"))
         {
-            Debug.Log("Dice Collision");
             HideTrap();
         }
     }
